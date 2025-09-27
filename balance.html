@@ -1,1 +1,29 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <title>Balance & Redeem</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav>
+    <a href="index.html">🏠 Home</a>
+    <a href="login.html">🔑 Login</a>
+    <a href="balance.html">💰 Balance</a>
+    <a href="betting.html">🎲 Betting</a>
+  </nav>
 
+  <div class="balance-box">
+    Current Balance: <span id="balance">0</span> coins
+  </div>
+
+  <div class="form-container">
+    <h3>Redeem Code</h3>
+    <input type="text" id="redeemCode" placeholder="Enter code">
+    <button onclick="redeem()">Redeem</button>
+    <p id="redeemStatus"></p>
+  </div>
+
+  <script src="user.js"></script>
+</body>
+</html>
