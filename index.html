@@ -1,89 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Fixed Random Number Generator (Admin Control)</title>
+  <title>Fixed Random Number Generator</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
     <h1>🎲 Fixed Random Number Generator</h1>
 
+    <!-- 00-99 Generator -->
     <section class="card">
       <h2>00 - 99</h2>
-      <div class="row">
-        <button id="gen2" class="btn">Generate</button>
-        <p id="twoDigit" class="display">--</p>
-      </div>
-      <p class="small">Format: always 2 digits (00, 01, 07, 42, 99)</p>
+      <button id="gen2" class="btn">Generate</button>
+      <p id="twoDigit" class="display">--</p>
     </section>
 
+    <!-- 000-999 Generator -->
     <section class="card">
       <h2>000 - 999</h2>
-      <div class="row">
-        <button id="gen3" class="btn">Generate</button>
-        <p id="threeDigit" class="display">--</p>
-      </div>
-      <p class="small">Format: always 3 digits (004, 123, 999)</p>
+      <button id="gen3" class="btn">Generate</button>
+      <p id="threeDigit" class="display">--</p>
     </section>
 
-    <hr>
-
-    <section class="card admin-area">
+    <!-- Admin Panel (hidden for normal users) -->
+    <section class="card admin-area" id="adminPanel" style="display:none;">
       <h2>🔑 Admin Panel</h2>
-      <div id="loginBox" class="box">
-        <input id="adminPass" type="password" placeholder="Enter admin password" />
-        <button id="loginBtn" class="btn">Login</button>
-        <p class="note">Default password is <code>admin123</code> — change it in <code>script.js</code>.</p>
-      </div>
+      <label>Password: <input type="password" id="adminPass" placeholder="Enter admin password"></label>
+      <button id="loginBtn" class="btn">Login</button>
 
-      <div id="adminPanel" class="box" style="display:none;">
-        <button id="logoutBtn" class="btn ghost">Logout</button>
-        <h3>General Settings</h3>
+      <div id="settingsPanel" style="display:none; margin-top:20px;">
+        <h3>Settings</h3>
         <label>
-          Show mode labels to users:
-          <select id="showModeLabel">
-            <option value="true">Yes</option>
-            <option value="false">No</option>
-          </select>
-        </label>
-
-        <hr>
-        <h3>00-99 Settings</h3>
-        <label>Mode:
+          00-99 Mode:
           <select id="mode2">
             <option value="random">Random</option>
             <option value="fixed">Fixed</option>
             <option value="custom">Custom Range</option>
           </select>
         </label>
-        <label>Fixed Number (00-99): <input id="fixed2" type="number" min="0" max="99" /></label>
-        <label>Custom Min: <input id="min2" type="number" value="0" min="0" max="99" /> Custom Max: <input id="max2" type="number" value="99" min="0" max="99" /></label>
+        <label>Fixed Number: <input id="fixed2" type="number" min="0" max="99"></label>
+        <label>Custom Min: <input id="min2" type="number" value="0"> Max: <input id="max2" type="number" value="99"></label>
 
         <hr>
-        <h3>000-999 Settings</h3>
-        <label>Mode:
+
+        <label>
+          000-999 Mode:
           <select id="mode3">
             <option value="random">Random</option>
             <option value="fixed">Fixed</option>
             <option value="custom">Custom Range</option>
           </select>
         </label>
-        <label>Fixed Number (000-999): <input id="fixed3" type="number" min="0" max="999" /></label>
-        <label>Custom Min: <input id="min3" type="number" value="0" min="0" max="999" /> Custom Max: <input id="max3" type="number" value="999" min="0" max="999" /></label>
+        <label>Fixed Number: <input id="fixed3" type="number" min="0" max="999"></label>
+        <label>Custom Min: <input id="min3" type="number" value="0"> Max: <input id="max3" type="number" value="999"></label>
 
-        <div class="admin-actions">
-          <button id="saveBtn" class="btn">Save Settings</button>
-          <button id="resetBtn" class="btn ghost">Reset to Defaults</button>
-        </div>
-        <p id="status" class="status"></p>
+        <br><br>
+        <button id="saveBtn" class="btn">Save Settings</button>
+        <p id="status"></p>
       </div>
     </section>
-
-    <footer class="footer">
-      <p>Made for quick use — admin controls stored in your browser (localStorage).</p>
-    </footer>
   </div>
 
   <script src="script.js"></script>
