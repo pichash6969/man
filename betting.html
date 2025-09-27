@@ -1,1 +1,37 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <title>Betting</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav>
+    <a href="index.html">🏠 Home</a>
+    <a href="login.html">🔑 Login</a>
+    <a href="balance.html">💰 Balance</a>
+    <a href="betting.html">🎲 Betting</a>
+  </nav>
 
+  <div class="form-container">
+    <h2>Place Your Bet</h2>
+    <label>Bet Type:</label>
+    <select id="betType">
+      <option value="2">2-Digit (x100)</option>
+      <option value="3">3-Digit (x1000)</option>
+    </select>
+    <input type="text" id="betNumber" placeholder="Enter number">
+    <input type="number" id="betAmount" placeholder="Enter coins">
+    <button onclick="placeBet()">Place Bet</button>
+    <p id="betStatus"></p>
+  </div>
+
+  <div class="history-container">
+    <h2>Bet History</h2>
+    <ul id="betHistory"></ul>
+  </div>
+
+  <script src="bets.js"></script>
+  <script src="user.js"></script>
+</body>
+</html>
