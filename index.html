@@ -1,29 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Lucky Random Number</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Lottery Scroll & Betting</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
-    <h1>🎲 Lucky Random Number 🎲</h1>
+    <h1>🎯 Lottery Scroll & Betting 🎯</h1>
 
-    <!-- 00-99 Generator -->
-    <section class="card">
-      <h2>00 - 99</h2>
-      <button id="gen2" class="btn">Generate</button>
-      <p id="twoDigit" class="display">--</p>
-    </section>
+    <!-- Clock -->
+    <div id="clockDisplay" class="clock">00:00:00</div>
 
-    <!-- 000-999 Generator -->
-    <section class="card">
-      <h2>000 - 999</h2>
-      <button id="gen3" class="btn">Generate</button>
-      <p id="threeDigit" class="display">--</p>
-    </section>
+    <!-- Auth -->
+    <div class="auth">
+      <div class="auth-column">
+        <h3>Signup</h3>
+        <input id="signupUsername" placeholder="Username" />
+        <input id="signupPassword" placeholder="Password" type="password" />
+        <button id="signupBtn">Signup</button>
+      </div>
+      <div class="auth-column">
+        <h3>Login</h3>
+        <input id="loginUsername" placeholder="Username" />
+        <input id="loginPassword" placeholder="Password" type="password" />
+        <button id="loginBtn">Login</button>
+        <button id="logoutBtn" style="display:none;">Logout</button>
+      </div>
+      <div id="authMessage" class="auth-msg"></div>
+    </div>
 
+    <!-- Redeem -->
+    <div class="redeem">
+      <h3>Redeem Code</h3>
+      <input id="redeemCodeInput" placeholder="Enter code (e.g. WELCOME100)" />
+      <button id="redeemBtn">Redeem</button>
+      <div id="redeemMessage" class="small-msg"></div>
+    </div>
+
+    <!-- Scrolling numbers (two boxes) -->
+    <div class="numbers-display">
+      <div class="scroll-wrap">
+        <div class="label">2-Digit</div>
+        <div class="scroll-container" id="scroll2"></div>
+      </div>
+      <div class="scroll-wrap">
+        <div class="label">3-Digit</div>
+        <div class="scroll-container" id="scroll3"></div>
+      </div>
+    </div>
+
+    <!-- Betting -->
+    <div class="betting">
+      <h3>Place Bets (virtual coins)</h3>
+
+      <div class="bet-row">
+        <div class="bet-column">
+          <h4>2-Digit Bet (payout ×100)</h4>
+          <input id="bet2Digit" type="number" min="0" max="99" placeholder="00-99" />
+          <input id="betAmount2" type="number" min="1" placeholder="Amount" />
+          <button id="placeBet2Btn">Place 2D Bet</button>
+        </div>
+
+        <div class="bet-column">
+          <h4>3-Digit Bet (payout ×1000)</h4>
+          <input id="bet3Digit" type="number" min="0" max="999" placeholder="000-999" />
+          <input id="betAmount3" type="number" min="1" placeholder="Amount" />
+          <button id="placeBet3Btn">Place 3D Bet</button>
+        </div>
+      </div>
+
+      <div id="userBalance" class="balance">Balance: 1000</div>
+      <div class="history-section">
+        <h4>Your Bets</h4>
+        <ul id="betHistoryList"></ul>
+      </div>
+    </div>
+
+    <!-- Result History (global) -->
+    <div class="history">
+      <h3>Result History</h3>
+      <ul id="historyList"></ul>
+    </div>
   </div>
 
   <script src="script.js"></script>
