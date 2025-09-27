@@ -1,1 +1,27 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <title>Login / Signup</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav>
+    <a href="index.html">🏠 Home</a>
+    <a href="login.html">🔑 Login</a>
+    <a href="balance.html">💰 Balance</a>
+    <a href="betting.html">🎲 Betting</a>
+  </nav>
 
+  <div class="form-container">
+    <h2>User Login / Signup</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="signup()">Signup</button>
+    <button onclick="login()">Login</button>
+    <p id="loginStatus"></p>
+  </div>
+
+  <script src="user.js"></script>
+</body>
+</html>
