@@ -1,74 +1,82 @@
-// User management with LocalStorage
+// ======= Users Storage =======
+let users = JSON.parse(localStorage.getItem('users')) || [];
+let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
 
-function getUsers() {
-  return JSON.parse(localStorage.getItem("users")) || {};
-}
-function saveUsers(users) {
-  localStorage.setItem("users", JSON.stringify(users));
-}
-
+// ======= Signup =======
 function signup() {
-  const username = document.getElementById("username").value;
-  const password = document.getElementById("password").value;
-  let users = getUsers();
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value.trim();
+  const status = document.getElementById('loginStatus');
 
-  if (users[username]) {
-    document.getElementById("loginStatus").innerText = "User already exists!";
-  } else {
-    users[username] = { password, balance: 100 }; // new user with 100 coins
-    saveUsers(users);
-    localStorage.setItem("currentUser", username);
-    document.getElementById("loginStatus").innerText = "Signup successful!";
+  if (!username || !password) {
+    status.textContent = 'Please enter username & password';
+    return;
   }
+
+  if (users.find(u => u.username === username)) {
+    status.textContent = 'Username already exists';
+    return;
+  }
+
+  const user = { username, password, balance: 0 };
+  users.push(user);
+  localStorage.setItem('users', JSON.stringify(users));
+  currentUser = user;
+  localStorage.setItem('currentUser', JSON.stringify(currentUser));
+  status.textContent = 'Signup successful!';
+  window.location.href = 'index.html';
 }
 
+// ======= Login =======
 function login() {
-  const username = document.getElementById("username").value;
-  const password = document.getElementById("password").value;
-  let users = getUsers();
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value.trim();
+  const status = document.getElementById('loginStatus');
 
-  if (users[username] && users[username].password === password) {
-    localStorage.setItem("currentUser", username);
-    document.getElementById("loginStatus").innerText = "Login successful!";
-  } else {
-    document.getElementById("loginStatus").innerText = "Invalid credentials!";
+  const user = users.find(u => u.username === username && u.password === password);
+  if (!user) {
+    status.textContent = 'Invalid username or password';
+    return;
   }
+
+  currentUser = user;
+  localStorage.setItem('currentUser', JSON.stringify(currentUser));
+  status.textContent = 'Login successful!';
+  window.location.href = 'index.html';
 }
 
-// Balance display
-function showBalance() {
-  const user = localStorage.getItem("currentUser");
-  if (!user) return;
-  let users = getUsers();
-  document.getElementById("balance").innerText = users[user].balance;
+// ======= Update Balance =======
+function updateBalanceUI() {
+  const balanceSpan = document.getElementById('balance') || document.getElementById('userBalance');
+  if (currentUser && balanceSpan) balanceSpan.textContent = currentUser.balance;
 }
+updateBalanceUI();
 
-// Redeem codes
+// ======= Redeem Codes =======
 const redeemCodes = {
   "FREE100": 100,
-  "WELCOME500": 500
+  "BONUS500": 500,
+  "MEGA1000": 1000
 };
 
 function redeem() {
-  const code = document.getElementById("redeemCode").value;
-  const user = localStorage.getItem("currentUser");
-  if (!user) {
-    document.getElementById("redeemStatus").innerText = "Login required!";
+  const codeInput = document.getElementById('redeemCode');
+  const status = document.getElementById('redeemStatus');
+
+  if (!currentUser) {
+    status.textContent = 'Please login first!';
     return;
   }
-  let users = getUsers();
+
+  const code = codeInput.value.trim().toUpperCase();
   if (redeemCodes[code]) {
-    users[user].balance += redeemCodes[code];
-    saveUsers(users);
-    document.getElementById("redeemStatus").innerText = `+${redeemCodes[code]} coins added!`;
-    showBalance();
+    currentUser.balance += redeemCodes[code];
+    updateBalanceUI();
+    users = users.map(u => u.username === currentUser.username ? currentUser : u);
+    localStorage.setItem('users', JSON.stringify(users));
+    status.textContent = `Success! ${redeemCodes[code]} coins added`;
+    codeInput.value = '';
   } else {
-    document.getElementById("redeemStatus").innerText = "Invalid code!";
+    status.textContent = 'Invalid redeem code';
   }
 }
-
-// Auto show balance if element exists
-window.onload = () => {
-  if (document.getElementById("balance")) showBalance();
-  if (document.getElementById("userBalance")) showBalance();
-};
