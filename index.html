@@ -1,117 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Lottery — Scroll & Betting</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lottery - Home</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="site-header">
-    <div class="brand">
-      <h1>LOTTO PRIME</h1>
-      <div class="tag">Live Draws • Virtual Betting</div>
+  <!-- Navigation -->
+  <nav>
+    <a href="index.html">🏠 Home</a>
+    <a href="login.html">🔑 Login</a>
+    <a href="balance.html">💰 Balance</a>
+    <a href="betting.html">🎲 Betting</a>
+  </nav>
+
+  <!-- Clock -->
+  <div class="clock-container">
+    <h1 id="clock"></h1>
+  </div>
+
+  <!-- Balance -->
+  <div class="balance-box">
+    Balance: <span id="userBalance">0</span> coins
+  </div>
+
+  <!-- Lottery Area -->
+  <div class="lottery-container">
+    <h2>🎰 Virtual Lottery 🎰</h2>
+
+    <div class="number-section">
+      <h3>2-Digit Draw</h3>
+      <div class="scroll-container">
+        <div class="scroll-numbers" id="scroll-2digit"></div>
+      </div>
     </div>
-    <div class="clock" id="clockDisplay">00:00:00</div>
-  </header>
 
-  <main class="main">
-    <section class="panel auth-panel">
-      <div class="auth-col">
-        <h3>Create account</h3>
-        <input id="signupUsername" placeholder="Username" />
-        <input id="signupPassword" placeholder="Password" type="password" />
-        <button id="signupBtn" class="btn">Signup</button>
+    <div class="number-section">
+      <h3>3-Digit Draw</h3>
+      <div class="scroll-container">
+        <div class="scroll-numbers" id="scroll-3digit"></div>
       </div>
-      <div class="auth-col">
-        <h3>Login</h3>
-        <input id="loginUsername" placeholder="Username" />
-        <input id="loginPassword" placeholder="Password" type="password" />
-        <div class="auth-actions">
-          <button id="loginBtn" class="btn">Login</button>
-          <button id="logoutBtn" class="btn outline" style="display:none;">Logout</button>
-        </div>
-      </div>
-      <div id="authMessage" class="muted small"></div>
-    </section>
+    </div>
+  </div>
 
-    <section class="panel redeem-panel">
-      <div class="redeem-left">
-        <h4>Redeem Code</h4>
-        <div class="redeem-row">
-          <input id="redeemCodeInput" placeholder="Code e.g. WELCOME100" />
-          <button id="redeemBtn" class="btn small">Redeem</button>
-        </div>
-        <div id="redeemMessage" class="small muted"></div>
-      </div>
-      <div class="balance-box">
-        <div class="balance-label">Balance</div>
-        <div id="userBalance" class="balance-amount">1000</div>
-      </div>
-    </section>
-
-    <section class="panel board-panel">
-      <!-- 2-Digit (Top) -->
-      <div class="draw-card draw-2d">
-        <div class="draw-header">
-          <div class="draw-title">2-DIGIT</div>
-          <div class="draw-sub">00 - 99</div>
-        </div>
-        <div class="scroll-container" id="scroll2"></div>
-      </div>
-
-      <!-- Betting & User Bets (to the right on wide screens) -->
-      <aside class="side-panel">
-        <div class="bet-card">
-          <h4>Place Bets</h4>
-
-          <div class="bet-section">
-            <label>2-Digit Bet (×100)</label>
-            <div class="bet-row">
-              <input id="bet2Digit" type="number" min="0" max="99" placeholder="00-99" />
-              <input id="betAmount2" type="number" min="1" placeholder="Amount" />
-            </div>
-            <button id="placeBet2Btn" class="btn full">Bet 2D</button>
-          </div>
-
-          <hr />
-
-          <div class="bet-section">
-            <label>3-Digit Bet (×1000)</label>
-            <div class="bet-row">
-              <input id="bet3Digit" type="number" min="0" max="999" placeholder="000-999" />
-              <input id="betAmount3" type="number" min="1" placeholder="Amount" />
-            </div>
-            <button id="placeBet3Btn" class="btn full">Bet 3D</button>
-          </div>
-
-          <div class="your-bets">
-            <h5>Your Bets</h5>
-            <ul id="betHistoryList"></ul>
-          </div>
-        </div>
-
-        <div class="history-card">
-          <h5>Result History</h5>
-          <ul id="historyList"></ul>
-        </div>
-      </aside>
-
-      <!-- 3-Digit (Bottom) -->
-      <div class="draw-card draw-3d">
-        <div class="draw-header">
-          <div class="draw-title">3-DIGIT</div>
-          <div class="draw-sub">000 - 999</div>
-        </div>
-        <div class="scroll-container" id="scroll3"></div>
-      </div>
-    </section>
-
-    <footer class="footer muted">
-      Demo / Prototype — All data stored locally in your browser (localStorage).
-    </footer>
-  </main>
+  <!-- Result History -->
+  <div class="history-container">
+    <h2>📜 Result History</h2>
+    <ul id="resultHistory"></ul>
+  </div>
 
   <script src="script.js"></script>
+  <script src="user.js"></script>
 </body>
 </html>
